@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lot Size Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
+</head>
+<body>
+    <div class="grid-container">
+        <div class="container">
+            <div class="h1">
+                <h1>Lot Size Calculator<br> With <br>Comission Intergration</h1><br>
+            </div>
+        
+
+         <form method="POST" action="/calculate">
+
+            <label for="risk_amount">Risk Amount in Dollars:</label>
+            <input placeholder="e.g 100" type="text" id="risk_amount" name="risk_amount" value="{{ form_data.get('risk_amount', '') }}" required>
+            
+            
+            <label for="commission_per_lot">Broker's Commission per Lot (in Dollars):</label>
+            <input placeholder="e.g 5, Input '0' to neglect" type="text" id="commission_per_lot" name="commission_per_lot" value="{{ form_data.get('commission_per_lot', '') }}" required>
+            
+            <label for="sl_size">SL Size (in Pips):</label>
+            <input placeholder="e.g. 5" type="text" id="sl_size" name="sl_size" value="{{ form_data.get('sl_size', '') }}" required>
+
+            {% if lot_size is not none %}
+            <div class="result-box">
+            <h2>Lot Size: {{ lot_size }}</h2>
+         </div>
+         {% endif %}
+
+            <button type="submit" id="submit" >Calculate Lot Size</button>
+
+            <button class="clearButton"  type="button" id="clearButton">Clear</button>
+        </form>
+        
+        <div class="donation">
+            
+            <span>Created by GatesKE</span>
+            
+            <!-- Twitter icon with link -->
+            <a href="https://x.com/Trader_GatesK" target="_blank" style="margin-left: 10px;">
+                <img src="static/twitter-icon.png" alt="Twitter" style="width:24px; height:24px;">
+            </a>
+            
+             <!-- Buy Me a Coffee button -->
+            <a href="https://buymeacoffee.com/great_g" target="_blank" style="margin-left: 10px;">
+                <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" style="height: 40px;">
+            </a>
+        </div>
+        
+
+     </div> 
+
+     <script>
+            document.getElementById('clearButton').addEventListener('click', function()
+             {
+                document.getElementById('risk_amount').value = '';
+                document.getElementById('commission_per_lot').value = '';
+                document.getElementById('sl_size').value = '';
+            });
+            
+       
+       
+        </script>
+
+
+        <div class="prop-firms">
+
+            <div class="header">
+                <h1>Top prop-firms</h1>
+            </div> 
+        
+
+            <div class="prop-firm">
+            <img src="{{ url_for('static', filename='propfirm5_logo.jpeg') }}" alt="Prop Firm 5">
+            <h3>FTMO</h3>
+            <a href="https://ftmo.com/en/" target="_blank">Visit</a>
+            </div>
+
+            <div class="prop-firm">
+            <img src="{{ url_for('static', filename='propfirm1_logo.png') }}" alt="Prop Firm 1">
+            <h3>Funded Next</h3>
+            <a href="https://fundednext.com/" target="_blank">Visit</a>
+            </div>
+
+            <div class="prop-firm">
+            <img src="{{ url_for('static', filename='propfirm2_logo.png') }}" alt="Prop Firm 2">
+            <h3>Funding Pips</h3>
+            <a href="https://app.fundingpips.com/register?ref=1ec14cae" target="_blank">Visit</a>
+            </div>
+
+            <div class="prop-firm">
+            <img src="{{ url_for('static', filename='propfirm3_logo.jpeg') }}" alt="Prop Firm 3">
+            <h3>Alpha Capital UK</h3>
+            <a href="https://alphacapitalgroup.uk/" target="_blank">Visit</a>
+            </div>
+
+            <div class="prop-firm">
+            <img src="{{ url_for('static', filename='propfirm4_logo.png') }}" alt="Prop Firm 4">
+            <h3>The 5%ers</h3>
+            <a href="https://new-hub.the5ers.com/" target="_blank">Visit</a>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>
